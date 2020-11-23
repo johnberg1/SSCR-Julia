@@ -1,6 +1,7 @@
 using Knet
 include("ImageEncoder.jl")
 include("Generator.jl")
+include("Evaluations.jl")
 # Sentence encoder is not yet complete so we are using a random vector
 # I haven't implemented a loop yet since everything is not complete, but the following code implements a forward pass
 
@@ -13,3 +14,5 @@ y = param(rand(rnn_out_dim,batch_size)) # Encoded sentence, we start with random
 z = param(randn(noise_dim,batch_size)) # Noise to input to the the generator
 
 generatedImage = forward(y,z,imgFeatures) # 128 x 128 x 3 x 5
+
+generatorLoss = AdversarialGenerator(generatedImage) # Evaluation of generator
